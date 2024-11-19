@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
-=======
 using System;
->>>>>>> 6fdd7a5c26eea2a127397e3a97d74aa93e0cede5
 using System.Collections.Generic;
 
 namespace TodoList
@@ -14,28 +10,6 @@ namespace TodoList
             List<string> tasks = new List<string>();
             string command;
 
-<<<<<<< HEAD
-            Console.WriteLine("Добро пожаловать в Todo List!");
-            do
-            {
-                Console.WriteLine("Введите команду (add/show/exit):");
-                command = Console.ReadLine();
-
-                if (command == "add")
-                {
-                    Console.WriteLine("Введите задачу:");
-                    string task = Console.ReadLine();
-                    tasks.Add(task);
-                    Console.WriteLine("Задача добавлена.check");
-                }
-                else if (command == "show")
-                {
-                    Console.WriteLine("Ваши задачи:");
-                    foreach (var t in tasks)
-                    {
-                        Console.WriteLine(t);
-                    }
-=======
             do
             {
                 Console.WriteLine("Введите команду (add/view/remove/exit):");
@@ -86,7 +60,6 @@ namespace TodoList
                     default:
                         Console.WriteLine("Неизвестная команда.");
                         break;
->>>>>>> 6fdd7a5c26eea2a127397e3a97d74aa93e0cede5
                 }
 
             } while (command != "exit");
