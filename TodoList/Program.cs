@@ -21,7 +21,7 @@ namespace TodoList
                     Console.WriteLine("Введите задачу:");
                     string task = Console.ReadLine();
                     tasks.Add(task);
-                    Console.WriteLine("Задача добавлена.");
+                    Console.WriteLine("Задача добавлена.check");
                 }
                 else if (command == "show")
                 {
