@@ -7,21 +7,21 @@ namespace TodoList
     {
         static void Main(string[] args)
         {
-            List<string> tasks = new List<string>();
+            List<Task> tasks = new List<Task>();
             string command;
 
             do
             {
-                Console.WriteLine("Введите команду (add/view/remove/exit):");
+                Console.WriteLine("Введите команду (add/view/remove/assign/exit):");
                 command = Console.ReadLine().ToLower();
 
                 switch (command)
                 {
                     case "add":
                         Console.WriteLine("Введите задачу:");
-                        string task = Console.ReadLine();
-                        tasks.Add(task);
-                        Console.WriteLine($"Задача '{task}' добавлена.");
+                        string taskDescription = Console.ReadLine();
+                        tasks.Add(new Task(taskDescription));
+                        Console.WriteLine($"Задача '{taskDescription}' добавлена.");
                         break;
 
                     case "view":
@@ -34,7 +34,7 @@ namespace TodoList
                         {
                             for (int i = 0; i < tasks.Count; i++)
                             {
-                                Console.WriteLine($"{i + 1}. {tasks[i]}");
+                                Console.WriteLine($"{i + 1}. {tasks[i].Description} (Назначен: {tasks[i].AssignedEmployee})");
                             }
                         }
                         break;
@@ -43,9 +43,24 @@ namespace TodoList
                         Console.WriteLine("Введите номер задачи для удаления:");
                         if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= tasks.Count)
                         {
-                            string removedTask = tasks[index - 1];
+                            string removedTask = tasks[index - 1].Description;
                             tasks.RemoveAt(index - 1);
                             Console.WriteLine($"Задача '{removedTask}' удалена.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Неверный номер задачи.");
+                        }
+                        break;
+
+                    case "assign":
+                        Console.WriteLine("Введите номер задачи для назначения:");
+                        if (int.TryParse(Console.ReadLine(), out int taskIndex) && taskIndex > 0 && taskIndex <= tasks.Count)
+                        {
+                            Console.WriteLine("Введите имя сотрудника:");
+                            string employeeName = Console.ReadLine();
+                            tasks[taskIndex - 1].AssignedEmployee = employeeName;
+                            Console.WriteLine($"Сотрудник '{employeeName}' назначен на задачу '{tasks[taskIndex - 1].Description}'.");
                         }
                         else
                         {
@@ -63,6 +78,17 @@ namespace TodoList
                 }
 
             } while (command != "exit");
+        }
+
+        class Task
+        {
+            public string Description { get; set; }
+            public string AssignedEmployee { get; set; } = "Не назначен";
+
+            public Task(string description)
+            {
+                Description = description;
+            }
         }
     }
 }
